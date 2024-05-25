@@ -1,6 +1,6 @@
-# Speech-to-Text Tools for GNOME Shell 
+# Speech-to-Text hotkey for Linux
 
-This repository contains two simple scripts that work together to provide an easy way to transcribe your speech to text using the OpenAI Whisper API. The scripts are designed to be bound to F9 and F10 in the GNOME Shell environment. 
+This repository contains two simple scripts that work together to provide an easy way to transcribe your speech to text using the OpenAI Whisper API. The scripts are designed to be bound to F9 and F10 in a Linux desktop environment. 
 
 ## Setup Instructions: 
 1. Clone this repository to your desired location. 
@@ -8,7 +8,7 @@ This repository contains two simple scripts that work together to provide an eas
     ```
     OPENAI_API_KEY=sk-YOUR_API_KEY
     ```
-3. Set up key bindings in your GNOME Shell settings to run the scripts when F9 and F10 are pressed. 
+3. Set up key bindings in your settings (e.g. keyboard settings on Ubuntu 24.04 gnome shell) to run the scripts when F9 and F10 are pressed. 
 4. Ensure that you have the required dependencies installed: 
     - `rec`: for audio recording 
     - `curl`: for making HTTP requests 
@@ -28,6 +28,9 @@ You can modify the scripts to suit your specific needs. For example, you can cha
 
 ## Troubleshooting: 
 If you encounter issues with the clipboard not pasting in GNOME Terminal or other applications, ensure that the necessary permissions are granted for clipboard access. You may also need to adjust the keyboard shortcut settings in your GNOME Shell configuration. 
+
+## Problems:
+For some reason, I can't get the automatic pasting to work in my terminal. I have to manually paste.
 
 ## Contributing: 
 Contributions are welcome! Please feel free to open issues, submit pull requests, or suggest improvements to make these tools even better. 
