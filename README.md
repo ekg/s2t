@@ -16,8 +16,10 @@ This repository contains two simple scripts that work together to provide an eas
     - `xclip`: for clipboard manipulation 
     - `xdotool`: for simulating keyboard input 
     You can install them all like this `sudo apt install sox lame curl xclip xdotool`
+5. Set up the hotkeys. You can do this in various ways depending on your OS. You'll want to make F9 run `start_recording.sh` and F10 run `stop_and_process_recording.sh`.
 
 ## Usage: 
+
 1. Press F9 to start recording your speech. 
 2. Press F10 to stop recording and trigger the transcription process. 
 3. The transcribed text will be automatically copied to your clipboard. 
