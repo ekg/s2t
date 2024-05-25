@@ -10,10 +10,12 @@ This repository contains two simple scripts that work together to provide an eas
     ```
 3. Set up key bindings in your settings (e.g. keyboard settings on Ubuntu 24.04 gnome shell) to run the scripts when F9 and F10 are pressed. 
 4. Ensure that you have the required dependencies installed: 
-    - `rec`: for audio recording 
+    - `sox` (`rec`): for audio recording 
+    - `lame`: for mp3 conversion
     - `curl`: for making HTTP requests 
     - `xclip`: for clipboard manipulation 
     - `xdotool`: for simulating keyboard input 
+    You can install them all like this `sudo apt install sox lame curl xclip xdotool`
 
 ## Usage: 
 1. Press F9 to start recording your speech. 
