@@ -1,30 +1,32 @@
 #!/bin/bash
 
+source $HOME/s2t/.keys
+
 # Stop recording
-kill $(cat $HOME/s2t/tmp/recording_pid)
+pid=$(cat "$HOME/s2t/tmp/recording_pid")
+kill $pid
 
-# Transcribe audio
-source $HOME/env_sandbox/bin/activate
-whisper $HOME/s2t/tmp/recording.wav --model tiny --output_dir="${HOME}/s2t/tmp/" --output_format="txt"
-deactivate
+audio=$(cat "$HOME/s2t/tmp/audio")
 
-# Temporary file for transcription
-TRANSCRIPTION_FILE="$HOME/s2t/tmp/recording.txt"
+# Activate the virtual environment
+#source "$HOME/env_sandbox/bin/activate"
 
-# Copy transcription to clipboard
-xclip -selection clipboard < $TRANSCRIPTION_FILE
+# Send audio file to OpenAI Whisper API using curl
+response=$(curl -s -X POST -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: multipart/form-data" \
+                -F file="@$audio" \
+                -F model="whisper-1" \
+                -F response_format="text" \
+                https://api.openai.com/v1/audio/transcriptions)
 
-# Optional: Notify the user that transcription is complete
-notify-send "Transcription Complete" "Your speech has been transcribed and is now in the clipboard."
+# Remove temporary audio file
+rm -f "$audio"
 
-# Ensure the clipboard has time to update
-sleep 0.1
+echo $response
+
+xclip -sel c <(echo $response)
 
 # Simulate the paste action
-xdotool key ctrl+v  # Use whichever key combination is appropriate
-
-# Clean up
-rm -rf $HOME/s2t/tmp/
-
+xdotool key ctrl+v # Use whichever key combination is appropriate
 
 

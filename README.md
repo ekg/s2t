@@ -1,58 +1,37 @@
-# 🗣️ ⌨️ Linux Speech-to-Text with Whisper
-This project enables speech-to-text functionality on Linux using OpenAI's Whisper. It allows users to record audio with a press of a key (F9 by default), transcribe the audio to text using Whisper, and automatically paste the transcribed text where the cursor is located. This functionality is particularly useful for quickly converting speech into text without navigating through multiple applications.
+# Speech-to-Text Tools for GNOME Shell 
 
-## Prerequisites
-Before you start, ensure you have the following installed on your Linux system:
+This repository contains two simple scripts that work together to provide an easy way to transcribe your speech to text using the OpenAI Whisper API. The scripts are designed to be bound to F9 and F10 in the GNOME Shell environment. 
 
-**`ffmpeg`** for audio recording.
-**`xclip`** for clipboard management.
-**`xdotool`** for automated paste.
-**`whisper`** for audio transcription.
-A Python virtual environment with Whisper installed (`$HOME/env_sandbox` in this guide, if yours is different, modify `stop_and_process_recording.sh` with yours).
-You can install `ffmpeg` `xdotool` and `xclip` using your distribution's package manager. For Whisper, follow the installation instructions provided by OpenAI.
+## Setup Instructions: 
+1. Clone this repository to your desired location. 
+2. Create a file named `.keys` in the repository directory and add your OpenAI API key in the following format: 
+    ```
+    OPENAI_API_KEY=sk-YOUR_API_KEY
+    ```
+3. Set up key bindings in your GNOME Shell settings to run the scripts when F9 and F10 are pressed. 
+4. Ensure that you have the required dependencies installed: 
+    - `rec`: for audio recording 
+    - `curl`: for making HTTP requests 
+    - `xclip`: for clipboard manipulation 
+    - `xdotool`: for simulating keyboard input 
 
-## Setup
-### 1. Clone the Repository
-Clone this repository to your local machine's home:
+## Usage: 
+1. Press F9 to start recording your speech. 
+2. Press F10 to stop recording and trigger the transcription process. 
+3. The transcribed text will be automatically copied to your clipboard. 
+4. Paste the transcribed text into your desired application by using the appropriate keyboard shortcut (e.g., Ctrl+V). 
 
-```
-cd
-git clone https://github.com/franchesoni/s2t.git
-cd linux-speech-to-text
-```
-### 2. Configure Keybindings
-**Disable Key Repeat for F9**: Add **`xset -r 75`** to your **`~/.profile`** to disable key repeat for F9. Log out and log back in for the change to take effect.
+Note: The scripts create a temporary directory (`$HOME/s2t/tmp`) to store audio files and related information. This directory will be automatically cleaned up when the recording process is stopped. 
 
-**Set Up `xbindkeys`**: Install **`xbindkeys`** and create a **`.xbindkeysrc`** in your home directory with the following content:
+## Customization: 
+You can modify the scripts to suit your specific needs. For example, you can change the audio recording format, bit rate, or other options in the `rec` command. Additionally, you can customize the keyboard shortcuts or add additional functionality to suit your workflow. 
 
-```
-"/home/user/s2t/start_recording.sh"
-    m:0x0 + c:75
+## Troubleshooting: 
+If you encounter issues with the clipboard not pasting in GNOME Terminal or other applications, ensure that the necessary permissions are granted for clipboard access. You may also need to adjust the keyboard shortcut settings in your GNOME Shell configuration. 
 
-"/home/user/s2t/stop_and_process_recording.sh"
-    Release + m:0x0 + c:75
-```
-Replace **`/home/user/s2t/`** with the actual path to the cloned repository (your home!).
+## Contributing: 
+Contributions are welcome! Please feel free to open issues, submit pull requests, or suggest improvements to make these tools even better. 
 
-### 3. Scripts Configuration
-**Modify the Scripts**: Ensure **`start_recording.sh`** and **`stop_and_process_recording.sh`** are executable. If necessary, modify the scripts to match your system configuration, such as the path to your Python virtual environment.
-```
-chmod +x start_recording.sh stop_and_process_recording.sh
-```
+Happy speaking and typing! 
 
-### 4. Downloading the model
-Open two consoles and `cd` to the project. Run `./start_recording.sh` in one and say something. Run `stop_and_process_recording.sh` on the second. You should see that the model is being downloaded and that after it is, you have the transcript pasted where you had the cursor (it's also available using ctrl+v). 
-
-### 5. Using the Speech-to-Text Functionality
-**Start Recording**: Press and hold F9 to start recording your speech.
-**Stop Recording and Transcribe**: Release F9 to stop recording. The audio will be transcribed to text using Whisper, and the text will be automatically pasted from the clipboard to where your cursor is located.
-
-## Troubleshooting
-If the transcription does not work, ensure Whisper is correctly installed in your virtual environment and that the scripts point to the correct path of the virtual environment.
-Make sure `ffmpeg` and `xclip` are correctly installed and accessible from your PATH.
-
-## Contributions
-Contributions are welcome! If you have improvements or bug fixes, please open a pull request or issue.
-
-## Credit
-https://chat.openai.com/share/db168b73-7dfe-4467-a450-35791e48403b
+-- The GNOME Speech-to-Text Tools Team
