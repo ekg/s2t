@@ -6,7 +6,7 @@ This repository contains two simple scripts that work together to provide an eas
 1. Clone this repository to your desired location. 
 2. Create a file named `.keys` in the repository directory and add your OpenAI API key in the following format: 
     ```
-    OPENAI_API_KEY=sk-YOUR_API_KEY
+    OPENAI_API_KEY=sk-YOUR_API_KEY >.keys
     ```
 3. Set up key bindings in your settings (e.g. keyboard settings on Ubuntu 24.04 gnome shell) to run the scripts when F9 and F10 are pressed. 
 4. Ensure that you have the required dependencies installed: 
