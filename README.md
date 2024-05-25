@@ -33,5 +33,3 @@ If you encounter issues with the clipboard not pasting in GNOME Terminal or othe
 Contributions are welcome! Please feel free to open issues, submit pull requests, or suggest improvements to make these tools even better. 
 
 Happy speaking and typing! 
-
--- The GNOME Speech-to-Text Tools Team
