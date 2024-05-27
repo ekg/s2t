@@ -7,24 +7,34 @@ pid=$(cat "$HOME/s2t/tmp/recording_pid")
 kill $pid
 
 audio=$(cat "$HOME/s2t/tmp/audio")
+
 # rec doesn't want to record to mp3, so we convert it
 lame -V 4 "$audio" "$audio.mp3"
+
 # clean up wav of recording
 rm -f "$audio"
 
+# Display green window when done
+zenity --info --text="" --title="Speech-to-Text" --timeout=1 --width=100 --height=100 --window-icon="info" --icon-name="process-completed" &
+pid=$!
+
 # Send audio file to OpenAI Whisper API using curl
 response=$(curl -s -X POST -H "Authorization: Bearer $OPENAI_API_KEY" \
-                -H "Content-Type: multipart/form-data" \
-                -F file="@$audio.mp3" \
-                -F model="whisper-1" \
-                -F response_format="text" \
-                https://api.openai.com/v1/audio/transcriptions)
+  -H "Content-Type: multipart/form-data" \
+  -F file="@$audio.mp3" \
+  -F model="whisper-1" \
+  -F response_format="text" \
+  https://api.openai.com/v1/audio/transcriptions)
+
+# Close the zenity window
+kill $pid
 
 # clean up mp3 of recording
 rm -f "$audio.mp3"
 
 # for debugging
 echo $response
+
 
 # copy response to clipboard
 xclip -sel c <(printf "%s" "$response")
