@@ -6,6 +6,10 @@ source $HOME/s2t/.keys
 pid=$(cat "$HOME/s2t/tmp/recording_pid")
 kill $pid
 
+# Display processing window with a gear emoji
+zenity --info --text="" --title="⚙️ Processing..." --ok-label="" --timeout=1 --width=200 --height=50 &
+pid=$!
+
 audio=$(cat "$HOME/s2t/tmp/audio")
 
 # rec doesn't want to record to mp3, so we convert it
@@ -13,10 +17,6 @@ lame -V 4 "$audio" "$audio.mp3"
 
 # clean up wav of recording
 rm -f "$audio"
-
-# Display processing window with a gear emoji
-zenity --info --text="" --title="⚙️ Processing..." --ok-label="" --timeout=1 --width=200 --height=50 &
-pid=$!
 
 # Send audio file to OpenAI Whisper API using curl
 response=$(curl -s -X POST -H "Authorization: Bearer $OPENAI_API_KEY" \
