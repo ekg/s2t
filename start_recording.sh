@@ -10,9 +10,9 @@ tmp=$audio
 # Remove it on exit
 trap 'rm "$tmp" ; exit' INT
 
-# Display the red window during recording
+# Display the recording window with a microphone emoji
 (
-  zenity --info --text="" --title="Speech-to-Text" --timeout=999999 --width=100 --height=100 --window-icon="info" --icon-name="process-stop" &
+  zenity --info --text="" --title="🎙️ Recording..." --ok-label="" --timeout=999999 --width=200 --height=50 &
   pid=$!
 
   # Listen to the mic.
