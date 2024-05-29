@@ -38,6 +38,7 @@ echo $response
 # copy response to clipboard
 xclip -sel c <(printf "%s" "$response")
 
+sleep 0.05
+
 # Simulate the paste action
 xdotool key ctrl+v
-
